@@ -25,7 +25,7 @@ SECRET_KEY = 'y_0-c996d*h1=_ozfpspnp+p!ov)wjq@(e4r)!&r006oef7l#9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['shubin123.pythonanywhere.com']
 
 
 # Application definition
@@ -119,3 +119,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/home/shuin123/Django-polls-app/static'
