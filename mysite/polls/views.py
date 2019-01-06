@@ -1,8 +1,7 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import generic
-
 from .models import Question, Choice
 
 
@@ -12,12 +11,10 @@ def index(request):
     return render(request, 'polls/index.html', context)
 
 
-
-
 def results(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     return render(request, 'polls/results.html', {'question': question})
-
+    
 
 
 def detail(request, question_id):
@@ -42,7 +39,6 @@ def vote(request, question_id):
     else:
         selected_choice.votes += 1
         selected_choice.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
+
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+

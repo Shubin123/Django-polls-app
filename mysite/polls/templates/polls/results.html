@@ -1,9 +1,80 @@
-<h1>{{ question.question_text }}</h1>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<body class="results">
+
+<h1 >{{ question.question_text }} results</h1>
+
+
+<canvas id="myChart" width="400" height="200"></canvas>
+<script type="text/javascript">
+
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+
+        //DYNAMIC
+        labels: [{% for choice in question.choice_set.all %}"{{ choice.choice_text }}",{% endfor %}],
+
+        datasets: [{
+            label: '# of Votes',
+
+            //DYNAMIC
+            data: [{% for choice in question.choice_set.all %}{{choice.votes }},{% endfor %}],
+
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});	
+
+
+
+</script>
+
+
+
 
 <ul>
+  
 {% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+
+
+    <li>{{ choice.choice_text }} got {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+
 {% endfor %}
 </ul>
 
-<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+
+
+<p><a href="https://shubin123.github.io/CredibleNewsNetwork.github.io/">Back to the Homepage</a></p>
+
+</body>
