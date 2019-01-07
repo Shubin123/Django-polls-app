@@ -1,5 +1,4 @@
 certifi==2018.11.29
-cfe==0.0.15
 Django==2.1.4
 django-simple-poll==0.2.3
 pipenv==2018.11.26
