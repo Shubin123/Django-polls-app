@@ -6,7 +6,7 @@
 
 <body class="results">
 
-<h1 >{{ question.question_text }} results</h1>
+<h4 >{{ question.question_text }} results</h4>
 
 
 <canvas id="myChart" width="400" height="200"></canvas>
@@ -21,7 +21,8 @@ var myChart = new Chart(ctx, {
         labels: [{% for choice in question.choice_set.all %}"{{ choice.choice_text }}",{% endfor %}],
 
         datasets: [{
-            label:  '# of Votes',
+            label: '# of Votes',
+
             //DYNAMIC
             data: [{% for choice in question.choice_set.all %}{{choice.votes }},{% endfor %}],
 
@@ -62,18 +63,9 @@ var myChart = new Chart(ctx, {
 
 
 
-<ul>
-  
-{% for choice in question.choice_set.all %}
-
-
-    <li>{{ choice.choice_text }} got {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-
-{% endfor %}
-</ul>
 
 
 
-<p><a href="http://shubin.pythonanywhere.com/polls/">Click here for more polls</a></p>
+
 
 </body>

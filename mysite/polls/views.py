@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import generic
 from .models import Question, Choice
+from django.http import HttpResponse
 
 
 def index(request):
@@ -14,7 +15,11 @@ def index(request):
 def results(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     return render(request, 'polls/results.html', {'question': question})
+
     
+def my_view(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'polls/embed.html', {'question': question})    
 
 
 def detail(request, question_id):
